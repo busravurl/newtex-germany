@@ -1,0 +1,65 @@
+import React, { useEffect, useState } from "react";
+import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { wp } from "../utils/screenResize";
+import axios from 'axios';
+import Header from "../components/header";
+import { useNavigation } from "@react-navigation/native";
+
+const Home = () => {
+
+
+
+  useEffect(() => {
+      getProducts()
+    }, [])
+
+  const navigation = useNavigation();
+  //const [open, setOpen] = useState(false)
+  const [products, setProducts] = useState([]);
+
+  const getProducts = async () => {
+  const apiUrl = 'https://germany.almaestro.org/api/main_desan'; 
+  try {
+    const response = await axios.post(apiUrl);
+    setProducts(response.data.data.main_desans);
+    console.log('products',products)
+  } catch (error) {
+    console.log(error);
+  }
+  };
+  
+  const _renderProducts = (item: any) => {
+
+
+      return (
+        <View style={{marginBottom: wp(5), alignItems: 'center'}}>
+          <View key={item.id} style={{backgroundColor: '#fff',width: wp(20),alignItems: 'center',margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1)}}>
+          <TouchableOpacity onPress={() => navigation.navigate('DetailsPage', { item: item.name })}>
+            <View style={{alignItems: 'center', margin: wp(4), width: wp(20)}}>
+              <Text style={{fontWeight: 'bold', color:'#fc6d32', marginBottom: wp(1)}}>{item.name}</Text>
+            </View>
+          </TouchableOpacity>
+          </View>
+        </View>
+      )
+    }
+
+
+
+
+  return(
+      <View style={{flex:1, backgroundColor: '#fff'}}>
+        <Header />
+        {/* <View style={{marginVertical: wp(15), alignItems: 'center'}}><Text>Please Choose A Pattern</Text></View> */}
+        <View style={{margin: wp(10), alignSelf: 'center',alignItems: 'center'}}><FlatList
+          numColumns={3}
+          data={products}
+          showsVerticalScrollIndicator={false}
+          renderItem={({item}) => _renderProducts(item)}
+        /></View>
+      </View>
+  )
+ 
+}
+
+export default Home;
