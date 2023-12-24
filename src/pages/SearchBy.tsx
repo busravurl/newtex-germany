@@ -16,14 +16,14 @@ const SearchBy =() => {
                     <TouchableOpacity 
                     style={{backgroundColor: '#fc6d32',width: wp(50), height: wp(20),alignItems: 'center',justifyContent: 'center',margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1)}}
                     onPress={() => navigation.navigate('Home')}>
-                        <Text style={{fontWeight: 'bold', color:'#fff', marginBottom: wp(1)}}>Search By Kalite</Text>
+                        <Text style={{fontWeight: 'bold', color:'#fff', marginBottom: wp(1)}}>Kaliteye Göre Ara</Text>
                     </TouchableOpacity>
 
                     <TouchableOpacity 
                     style={{backgroundColor: '#fc6d32',width: wp(50), height: wp(20),alignItems: 'center',justifyContent: 'center',margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1)}}
                     onPress={() => navigation.navigate('DesenPage')}
                     >
-                        <Text style={{fontWeight: 'bold', color:'#fff', marginBottom: wp(1)}}>Search By Desan</Text>
+                        <Text style={{fontWeight: 'bold', color:'#fff', marginBottom: wp(1)}}>Desene Göre Ara</Text>
                     </TouchableOpacity>
                 </View>
             </View>

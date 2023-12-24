@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, Text, TouchableOpacity, View } from "react-native";
 import { wp } from "../utils/screenResize";
 import axios from 'axios';
 import Header from "../components/header";
@@ -14,7 +14,6 @@ const Home = () => {
     }, [])
 
   const navigation = useNavigation();
-  //const [open, setOpen] = useState(false)
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
@@ -22,7 +21,6 @@ const Home = () => {
   try {
     const response = await axios.post(apiUrl);
     setProducts(response.data.data.main_desans);
-    console.log('products',products)
   } catch (error) {
     console.log(error);
   }
@@ -50,7 +48,6 @@ const Home = () => {
   return(
       <View style={{flex:1, backgroundColor: '#fff'}}>
         <Header />
-        {/* <View style={{marginVertical: wp(15), alignItems: 'center'}}><Text>Please Choose A Pattern</Text></View> */}
         <View style={{margin: wp(10), alignSelf: 'center',alignItems: 'center'}}><FlatList
           numColumns={3}
           data={products}

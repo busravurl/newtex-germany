@@ -1,23 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {SafeAreaView, Text, FlatList, View, TextInput, TouchableOpacity, Image} from 'react-native';
+import {Text, FlatList, View, TouchableOpacity, Image} from 'react-native';
 import axios from 'axios';
 import Modal from 'react-native-modal';
 
 import Input from '../components/input';
-import { useIsFocused, useNavigation, useRoute } from '@react-navigation/native';
+import { useIsFocused } from '@react-navigation/native';
 import { wp } from '../utils/screenResize';
 
 function DesenPage() {
 
 
-    const navigation = useNavigation();
-    const route = useRoute();
-
     const [searchText, setSearchText] = useState('');
     const [data, setData] = useState('');
-    const [search, setsearch] = useState("");
 
-    const [details, setDetails] = useState([]);
     const [inputModalVisible, setInputModalVisible] = useState(false);
     const [selectedItem, setSelectedItem] = useState(null);
     const isFocused = useIsFocused()
@@ -44,7 +39,6 @@ function DesenPage() {
         try {
           const response = await axios.post(apiUrl);
           setData(response.data.data.desans);
-        console.log('data', data);
         } catch (error) {
           console.log(error);
         }
@@ -52,12 +46,8 @@ function DesenPage() {
 
       const DetailsModal = ({visible, onClose, item}) => {
 
-        const route = useRoute();
-        const isFocused = useIsFocused()
-        
       
         const [desansDetail, setDesansDetail] = useState([]);
-        const [isLoading, setIsLoading] = useState(true);
       
         useEffect(() => {
             initialScreen()
@@ -76,7 +66,6 @@ function DesenPage() {
             try {
               const response = await axios.post(apiUrl+ query);
               setDesansDetail(response.data.data.desan);
-              console.log('desansDetaildesansDetail',desansDetail)
               
             } catch (error) {
               console.log(error);
@@ -108,7 +97,7 @@ function DesenPage() {
                       shadowOpacity: 0.22,
                       shadowRadius: 2.22,
                       elevation: 5,
-                      height: '50%'}}>
+                      height: '65%'}}>
                       <View style={{flex:1, padding: wp(1)}}>
                       <TouchableOpacity onPress={onClose} style={{alignItems: 'flex-end',marginBottom: wp(2)}}> 
                       <Image style={{resizeMode:'cover'}} source={require('../assets/cross.png')} /></TouchableOpacity>
@@ -128,8 +117,16 @@ function DesenPage() {
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.perakende}</Text>
                             </View>
                             <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Ağırlık</Text>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", width: wp(40), borderLeftWidth: wp(0.1)}}>{desansDetail.agirlik}</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Kompozisyon</Text>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", width: wp(40), borderLeftWidth: wp(0.1)}}>{desansDetail.kompozisyon}</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Kod</Text>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", width: wp(40), borderLeftWidth: wp(0.1)}}>{desansDetail.code}</Text>
                             </View>
                             
                               
