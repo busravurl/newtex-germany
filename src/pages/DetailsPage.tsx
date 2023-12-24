@@ -1,4 +1,4 @@
-import { View, Text, FlatList, ScrollView, TouchableOpacity, Image } from 'react-native'
+import { View, SafeAreaView, Text, FlatList, ScrollView, TouchableOpacity, Image } from 'react-native'
 import React, { useEffect, useState }  from 'react'
 import { useIsFocused, useRoute } from '@react-navigation/native';
 import { wp } from '../utils/screenResize';
@@ -158,7 +158,7 @@ const DetailsPage = () => {
     };
 
   return (
-    <View style={{flex:1, backgroundColor: '#fff'}}>
+    <SafeAreaView style={{flex:1, backgroundColor: '#fff'}}>
         <Header />
         <ScrollView>
         <View style={{ alignItems:'center',marginBottom: wp(10),borderRadius: wp(2),}} >
@@ -177,7 +177,7 @@ const DetailsPage = () => {
                 
         </View>
         </ScrollView>
-    </View>
+    </SafeAreaView>
 );
 }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity, View } from "react-native";
+import { FlatList, SafeAreaView, Text, TouchableOpacity, View } from "react-native";
 import { wp } from "../utils/screenResize";
 import axios from 'axios';
 import Header from "../components/header";
@@ -46,7 +46,7 @@ const Home = () => {
 
 
   return(
-      <View style={{flex:1, backgroundColor: '#fff'}}>
+      <SafeAreaView style={{flex:1, backgroundColor: '#fff'}}>
         <Header />
         <View style={{margin: wp(10), alignSelf: 'center',alignItems: 'center'}}><FlatList
           numColumns={3}
@@ -54,7 +54,7 @@ const Home = () => {
           showsVerticalScrollIndicator={false}
           renderItem={({item}) => _renderProducts(item)}
         /></View>
-      </View>
+      </SafeAreaView>
   )
  
 }

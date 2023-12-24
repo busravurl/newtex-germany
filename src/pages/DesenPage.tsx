@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
-import {Text, FlatList, View, TouchableOpacity, Image} from 'react-native';
+import {Text, SafeAreaView, FlatList, View, TouchableOpacity, Image} from 'react-native';
 import axios from 'axios';
 import Modal from 'react-native-modal';
+import Header from '../components/header';
 
 import Input from '../components/input';
 import { useIsFocused } from '@react-navigation/native';
@@ -158,7 +159,8 @@ function DesenPage() {
   
  
     return(
-        <View style={{flex:1, backgroundColor: '#fff'}}>
+        <SafeAreaView style={{flex:1, backgroundColor: '#fff'}}>
+	    <Header />
             <View >
             <Input
                 placeholder="Arama yapın..."
@@ -182,7 +184,7 @@ function DesenPage() {
                 
             </View>
             
-        </View>
+        </SafeAreaView>
     );
 };
 

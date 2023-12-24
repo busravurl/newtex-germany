@@ -1,5 +1,5 @@
 import React from "react";
-import {View, Text, TouchableOpacity} from "react-native";
+import {View,SafeAreaView, Text, TouchableOpacity} from "react-native";
 import { wp } from "../utils/screenResize";
 import { useNavigation } from "@react-navigation/native";
 import Header from "../components/header";
@@ -10,7 +10,7 @@ const SearchBy =() => {
     return (
        
            
-        <View style={{flex:1, backgroundColor: '#fff'}}>
+        <SafeAreaView style={{flex:1, backgroundColor: '#fff'}}>
         <Header />
                 <View style={{marginBottom: wp(5), alignItems: 'center', marginTop: '50%'}} >
                     <TouchableOpacity 
@@ -26,7 +26,7 @@ const SearchBy =() => {
                         <Text style={{fontWeight: 'bold', color:'#fff', marginBottom: wp(1)}}>Desene Göre Ara</Text>
                     </TouchableOpacity>
                 </View>
-            </View>
+            </SafeAreaView>
        
     )
 }
