@@ -123,7 +123,7 @@ function DesenPage() {
                             </View>
                             <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kompozisyon</Text>
-                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.kompozisyon}</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), width: wp(55), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.kompozisyon}</Text>
                             </View>
                             <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kod</Text>
