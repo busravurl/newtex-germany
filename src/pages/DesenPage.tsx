@@ -77,7 +77,7 @@ function DesenPage() {
       
           return(
               <Modal
-                  style={{justifyContent: 'center', margin:0}} 
+                  style={{justifyContent: 'center', margin: wp(0)}} 
                   isVisible={visible}
                   swipeDirection="down" 
                   backdropOpacity={0.3}
@@ -99,35 +99,35 @@ function DesenPage() {
                       shadowRadius: 2.22,
                       elevation: 5,
                       height: '65%'}}>
-                      <View style={{flex:1, padding: wp(1)}}>
+                      <View style={{flex:1, padding: wp(2)}}>
                       <TouchableOpacity onPress={onClose} style={{alignItems: 'flex-end',marginBottom: wp(2)}}> 
                       <Image style={{resizeMode:'cover'}} source={require('../assets/cross.png')} /></TouchableOpacity>
                       
                       <View style={{ alignItems:'center'}}>
                       <View >
-                            <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Kalite </Text>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.kalite}</Text>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kalite </Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.kalite}</Text>
                             </View>
-                            <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Toptan</Text>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.toptan}</Text>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Toptan</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.toptan} + KDV</Text>
                             </View>
-                            <View style={{flexDirection:'row',margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Perakende</Text>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.perakende}</Text>
+                            <View style={{flexDirection:'row',margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Perakende</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.perakende} + KDV</Text>
                             </View>
-                            <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Ağırlık</Text>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", width: wp(40), borderLeftWidth: wp(0.1)}}>{desansDetail.agirlik}</Text>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Ağırlık</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.agirlik}</Text>
                             </View>
-                            <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Kompozisyon</Text>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", width: wp(40), borderLeftWidth: wp(0.1)}}>{desansDetail.kompozisyon}</Text>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kompozisyon</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.kompozisyon}</Text>
                             </View>
-                            <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Kod</Text>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", width: wp(40), borderLeftWidth: wp(0.1)}}>{desansDetail.code}</Text>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kod</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.code}</Text>
                             </View>
                             
                               

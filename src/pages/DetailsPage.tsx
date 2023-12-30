@@ -98,32 +98,31 @@ const DetailsPage = () => {
                   
                   <View style={{ alignItems:'center'}}>
                   <View >
-                        <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                          <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Kalite </Text>
-                          <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.kalite}</Text>
-                        </View>
-                        <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                          <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Toptan</Text>
-                          <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.toptan}</Text>
-                        </View>
-                        <View style={{flexDirection:'row',margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                          <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Perakende</Text>
-                          <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.perakende}</Text>
-                        </View>
-                        <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                          <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Ağırlık</Text>
-                          <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", width: wp(40), borderLeftWidth: wp(0.1)}}>{kaliteDetail.agirlik}</Text>
-                        </View>
-                        <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                          <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Kompozisyon</Text>
-                          <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", width: wp(40), borderLeftWidth: wp(0.1)}}>{kaliteDetail.kompozisyon}</Text>
-                        </View>
-                        <View style={{flexDirection:'row', margin: wp(2.5), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                          <Text style={{color:'#333333', fontSize:wp(5), padding: wp(3), width: wp(40)}} >Kod</Text>
-                          <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), borderColor: "#a0a0a0", width: wp(40), borderLeftWidth: wp(0.1)}}>{kaliteDetail.code}</Text>
-                        </View>
-                        
-                          
+                  <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kalite </Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.kalite}</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Toptan</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.toptan} + KDV</Text>
+                            </View>
+                            <View style={{flexDirection:'row',margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Perakende</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.perakende} + KDV</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Ağırlık</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.agirlik}</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kompozisyon</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.kompozisyon}</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kod</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.code}</Text>
+                            </View>
+                            
                       </View>
                   </View>
                   </View>
