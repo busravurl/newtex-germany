@@ -4,9 +4,12 @@ import { wp } from "../utils/screenResize";
 import axios from 'axios';
 import Header from "../components/header";
 import { useNavigation } from "@react-navigation/native";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import { RootState } from "../redux/store";
+import { useSelector } from "react-redux";
 
 const Home = () => {
-
+  
 
 
   useEffect(() => {
@@ -17,13 +20,18 @@ const Home = () => {
   const [products, setProducts] = useState([]);
 
   const getProducts = async () => {
-  const apiUrl = 'https://germany.almaestro.org/api/main_desan'; 
-  try {
-    const response = await axios.post(apiUrl);
-    setProducts(response.data.data.main_desans);
-  } catch (error) {
-    console.log(error);
-  }
+    const apiUrl = 'https://germany.almaestro.org/api/main_desan'; 
+    try {
+      const token = await AsyncStorage.getItem('token');
+      const response = await axios.post(apiUrl, null, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setProducts(response.data.data.main_desans);
+    } catch (error) {
+      console.log(error);
+    }
   };
   
   const _renderProducts = (item: any) => {

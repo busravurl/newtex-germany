@@ -7,6 +7,7 @@ import Header from '../components/header';
 import Input from '../components/input';
 import { useIsFocused } from '@react-navigation/native';
 import { wp } from '../utils/screenResize';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 function DesenPage() {
 
@@ -38,7 +39,13 @@ function DesenPage() {
     const getDesan = async () => {
         const apiUrl = 'https://germany.almaestro.org/api/desans'; 
         try {
-          const response = await axios.post(apiUrl);
+          const token = await AsyncStorage.getItem('token');
+          const response = await axios.post(apiUrl, null, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
+          
           setData(response.data.data.desans);
         } catch (error) {
           console.log(error);
@@ -65,7 +72,12 @@ function DesenPage() {
             const apiUrl = 'https://germany.almaestro.org/api/desan/'; 
             let query = `${desans}`
             try {
-              const response = await axios.post(apiUrl+ query);
+              const token = await AsyncStorage.getItem('token');
+              const response = await axios.post(apiUrl+ query, null, {
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
               setDesansDetail(response.data.data.desan);
               
             } catch (error) {
@@ -98,24 +110,33 @@ function DesenPage() {
                       shadowOpacity: 0.22,
                       shadowRadius: 2.22,
                       elevation: 5,
-                      height: '65%'}}>
+                      height: '78%'}}>
                       <View style={{flex:1, padding: wp(2)}}>
                       <TouchableOpacity onPress={onClose} style={{alignItems: 'flex-end',marginBottom: wp(2)}}> 
                       <Image style={{resizeMode:'cover'}} source={require('../assets/cross.png')} /></TouchableOpacity>
                       
-                      <View style={{ alignItems:'center'}}>
-                      <View >
-                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                      <View style={{flex:1, alignItems:'center', justifyContent: 'center'}}>
+                  <View >
+                  <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kalite </Text>
                               <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.kalite}</Text>
                             </View>
                             <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Toptan</Text>
-                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.toptan} + KDV</Text>
+                              <Text style={{color:'#fc6d32', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Toptan Nakit</Text>
+                              <Text style={{color:'#fc6d32', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.ToptanNakit} + KDV</Text>
                             </View>
-                            <View style={{flexDirection:'row',margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Perakende</Text>
-                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.perakende} + KDV</Text>
+                            
+                            <View style={{flexDirection:'row',margin: wp(3), marginTop: wp(0), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#fc6d32', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Perakende Nakit</Text>
+                              <Text style={{color:'#fc6d32', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.PerakendeNakit} + KDV</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Toptan Taksit</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.ToptanTaksit} + KDV</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(3), marginTop: wp(0), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Perakende Taksit</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.PerakendeTaksit} + KDV</Text>
                             </View>
                             <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Ağırlık</Text>
@@ -123,16 +144,15 @@ function DesenPage() {
                             </View>
                             <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kompozisyon</Text>
-                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), width: wp(55), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.kompozisyon}</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", width: wp(55), borderLeftWidth: wp(0.1)}}>{desansDetail.kompozisyon}</Text>
                             </View>
-                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                            {/* <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kod</Text>
                               <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{desansDetail.code}</Text>
-                            </View>
+                            </View> */}
                             
-                              
-                          </View>
                       </View>
+                  </View>
                       </View>
       
                   </View>

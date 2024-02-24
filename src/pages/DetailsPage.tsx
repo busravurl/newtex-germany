@@ -5,13 +5,13 @@ import { wp } from '../utils/screenResize';
 import axios from 'axios';
 import Header from '../components/header';
 import Modal from 'react-native-modal';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 
 
 const DetailsPage = () => {
   const route = useRoute();
   const item = route.params.item; 
-
   const [details, setDetails] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [inputModalVisible, setInputModalVisible] = useState(false);
@@ -35,6 +35,7 @@ const DetailsPage = () => {
     
     
   const initialScreen = async () => {
+    
     getProductDetails(item);
     setIsLoading(false)
   }
@@ -42,6 +43,7 @@ const DetailsPage = () => {
   const DetailsModal = ({visible, onClose, item}) => {
 
     const [kaliteDetail, setKaliteDetail] = useState([]);
+    const [permission, setPermission] = useState(null);
   
     useEffect(() => {
         initialScreen()
@@ -51,15 +53,34 @@ const DetailsPage = () => {
     
       const initialScreen = async () => {
         getDetails(item);
+        retrieveUser();
         setIsLoading(false)
       }
   
+      const retrieveUser = async () => {
+        try {
+          const userString = await AsyncStorage.getItem('user');
+          const parsedUser = JSON.parse(userString);
+          
+          // Sadece 'permission' bilgisini al
+          const userPermission = parsedUser?.permission || null;
+          setPermission(userPermission);
+        } catch (error) {
+          console.error('Error retrieving user', error);
+        }
+      };
     const getDetails = async (kalite: any) => {
         const apiUrl = 'https://germany.almaestro.org/api/details/'; 
         let query = `${kalite}`
         try {
-          const response = await axios.post(apiUrl+ query);
+          const token = await AsyncStorage.getItem('token');
+          const response = await axios.post(apiUrl+ query, null, {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          });
           setKaliteDetail(response.data.data.detail);
+          console.log(response.data.data.detail);
           
         } catch (error) {
           console.log(error);
@@ -91,24 +112,33 @@ const DetailsPage = () => {
                   shadowOpacity: 0.22,
                   shadowRadius: 2.22,
                   elevation: 5,
-                  height: '65%'}}>
+                  height: '78%'}}>
                   <View style={{flex:1, padding: wp(1)}}>
                   <TouchableOpacity onPress={onClose} style={{alignItems: 'flex-end',marginBottom: wp(2)}}> 
                   <Image style={{resizeMode:'cover'}} source={require('../assets/cross.png')} /></TouchableOpacity>
                   
-                  <View style={{ alignItems:'center'}}>
+                  <View style={{flex:1, alignItems:'center', justifyContent: 'center'}}>
                   <View >
                   <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kalite </Text>
                               <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.kalite}</Text>
                             </View>
                             <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Toptan</Text>
-                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.toptan} + KDV</Text>
+                              <Text style={{color:'#fc6d32', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Toptan Nakit</Text>
+                              <Text style={{color:'#fc6d32', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.ToptanNakit} + KDV</Text>
                             </View>
-                            <View style={{flexDirection:'row',margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
-                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Perakende</Text>
-                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.perakende} + KDV</Text>
+                            
+                            <View style={{flexDirection:'row',margin: wp(3), marginTop: wp(0), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#fc6d32', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Perakende Nakit</Text>
+                              <Text style={{color:'#fc6d32', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.PerakendeNakit} + KDV</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Toptan Taksit</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.ToptanTaksit} + KDV</Text>
+                            </View>
+                            <View style={{flexDirection:'row', margin: wp(3), marginTop: wp(0), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                              <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Perakende Taksit</Text>
+                              <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.PerakendeTaksit} + KDV</Text>
                             </View>
                             <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Ağırlık</Text>
@@ -118,10 +148,10 @@ const DetailsPage = () => {
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kompozisyon</Text>
                               <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", width: wp(55), borderLeftWidth: wp(0.1)}}>{kaliteDetail.kompozisyon}</Text>
                             </View>
-                            <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
+                            {/* <View style={{flexDirection:'row', margin: wp(3), borderRadius: wp(1), borderColor: "#a0a0a0", borderWidth: wp(0.1), alignItems: 'center'}}>
                               <Text style={{color:'#333333', fontSize:wp(4), padding: wp(3), width: wp(27)}} >Kod</Text>
                               <Text style={{color:'#333333', fontSize:wp(5),fontWeight: 'bold', padding: wp(2), borderColor: "#a0a0a0", borderLeftWidth: wp(0.1)}}>{kaliteDetail.code}</Text>
-                            </View>
+                            </View> */}
                             
                       </View>
                   </View>
@@ -136,7 +166,12 @@ const DetailsPage = () => {
       const apiUrl = 'https://germany.almaestro.org/api/kalite/'; 
       let query = `${name}`
       try {
-        const response = await axios.post(apiUrl+ query);
+        const token = await AsyncStorage.getItem('token');
+        const response = await axios.post(apiUrl+ query, null, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setDetails(response.data.data.kalite);
       } catch (error) {
         console.log(error);
@@ -159,7 +194,7 @@ const DetailsPage = () => {
   return (
     <SafeAreaView style={{flex:1, backgroundColor: '#fff'}}>
         <Header />
-        <ScrollView>
+        <ScrollView style={{marginTop: wp(10)}}>
         <View style={{ alignItems:'center',marginBottom: wp(10),borderRadius: wp(2),}} >
                
                <FlatList
